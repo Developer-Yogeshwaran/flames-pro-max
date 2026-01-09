@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>FLAMES PRO 💖</title>
+<title>FLAMES PRO MAX 💖</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -15,7 +15,7 @@
 
 /* BACKGROUND */
 body{
-  height:100vh;
+  min-height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
@@ -24,6 +24,7 @@ body{
     url("flames-bg.png");
   background-size:cover;
   background-position:center;
+  background-repeat:no-repeat;
   background-attachment:fixed;
   overflow:hidden;
   transition:.6s;
@@ -37,9 +38,10 @@ body.neon{
 
 /* CARD */
 .card{
-  width:390px;
-  padding:30px;
-  border-radius:26px;
+  width:90%;
+  max-width:400px;
+  padding:25px 20px;
+  border-radius:25px;
   background:rgba(255,255,255,.22);
   backdrop-filter:blur(22px);
   box-shadow:0 25px 70px rgba(0,0,0,.65);
@@ -55,25 +57,26 @@ body.neon{
 
 h1{
   margin-bottom:15px;
+  font-size:1.7rem;
   text-shadow:0 0 30px #ff9ad5;
 }
 
-/* INPUT */
+/* INPUTS */
 input{
   width:100%;
-  padding:14px;
+  padding:12px;
   margin:8px 0;
-  border-radius:15px;
+  border-radius:12px;
   border:none;
   outline:none;
-  font-size:15px;
+  font-size:1rem;
 }
 
-/* BUTTON */
+/* BUTTONS */
 button{
   margin-top:12px;
-  padding:14px 32px;
-  border-radius:40px;
+  padding:12px 26px;
+  border-radius:35px;
   border:none;
   background:linear-gradient(135deg,#ff0844,#ffb199);
   color:#fff;
@@ -81,14 +84,15 @@ button{
   cursor:pointer;
   box-shadow:0 0 40px rgba(255,0,120,.9);
   transition:.3s;
+  font-size:1rem;
 }
-button:hover{transform:scale(1.12)}
+button:hover{transform:scale(1.1)}
 
 /* RESULT */
 .result{
   margin-top:18px;
-  min-height:70px;
-  font-size:21px;
+  min-height:60px;
+  font-size:1rem;
   font-weight:bold;
   text-shadow:0 0 25px #fff;
   white-space:pre-line;
@@ -97,25 +101,31 @@ button:hover{transform:scale(1.12)}
 /* HISTORY */
 .history{
   margin-top:12px;
-  max-height:90px;
+  max-height:80px;
   overflow:auto;
-  font-size:13px;
+  font-size:0.85rem;
   text-align:left;
 }
 
 /* CONTROLS */
 .controls{
   display:flex;
+  flex-wrap:wrap;
   justify-content:space-between;
   margin-top:15px;
-  font-size:20px;
+  font-size:1.1rem;
 }
-.control{cursor:pointer}
+.control{
+  flex:1;
+  margin:3px;
+  text-align:center;
+  cursor:pointer;
+}
 
 /* HEART RAIN */
 .heart{
   position:absolute;
-  font-size:22px;
+  font-size:20px;
   animation:fall linear infinite;
 }
 @keyframes fall{
@@ -123,10 +133,10 @@ button:hover{transform:scale(1.12)}
   to{top:110%}
 }
 
-/* SPARK */
+/* SPARKS */
 .spark{
   position:absolute;
-  font-size:14px;
+  font-size:12px;
   animation:spark .8s linear;
 }
 @keyframes spark{
@@ -136,23 +146,35 @@ button:hover{transform:scale(1.12)}
 
 /* CREDIT */
 .credit{
-  margin-top:14px;
+  margin-top:12px;
   font-size:12px;
-  opacity:.95;
+  opacity:0.9;
+  letter-spacing:.5px;
   text-align:center;
-  letter-spacing:.4px;
+  cursor:pointer;
+  transition:transform .25s, opacity .25s;
   text-shadow:0 0 12px rgba(255,255,255,.6);
 }
-
 .credit a{
   color:#ffd1ec;
   text-decoration:none;
   font-weight:600;
   margin:0 4px;
 }
-
 .credit a:hover{
   text-decoration:underline;
+  transform:scale(1.05);
+  display:inline-block;
+}
+
+/* RESPONSIVE */
+@media(max-width:400px){
+  h1{font-size:1.5rem;}
+  button{font-size:0.95rem;padding:11px 22px;}
+  input{font-size:0.95rem;padding:10px;}
+  .result{font-size:0.95rem;}
+  .history{font-size:0.8rem;}
+  .controls{font-size:1rem;}
 }
 </style>
 </head>
@@ -160,7 +182,7 @@ button:hover{transform:scale(1.12)}
 <body>
 
 <div class="card">
-  <h1>🔥 FLAMES PRO 🔥</h1>
+  <h1>🔥 FLAMES PRO MAX 🔥</h1>
 
   <input id="n1" placeholder="Your Name">
   <input id="n2" placeholder="Partner Name">
@@ -181,10 +203,10 @@ button:hover{transform:scale(1.12)}
 
   <!-- CREDIT -->
   <div class="credit">
-    © <span id="year"></span>
-    Made by <strong>Yogeshwaran</strong><br>
+    © <span id="year"></span> • Made by <strong>Yogeshwaran</strong> |
     <a href="https://github.com/Yogeshwaran" target="_blank">GitHub</a> |
-    <a href="https://www.linkedin.com/in/yogeshwaran" target="_blank">LinkedIn</a>
+    <a href="https://www.linkedin.com/in/yogeshwaran-a-64655b396" target="_blank">LinkedIn</a>
+     FLAMES Pro Max 🔥
   </div>
 </div>
 
@@ -198,6 +220,7 @@ const n2=document.getElementById("n2");
 const res=document.getElementById("res");
 const hist=document.getElementById("hist");
 
+/* AUTO YEAR */
 document.getElementById("year").innerText=new Date().getFullYear();
 
 /* MUSIC */
@@ -225,11 +248,18 @@ setInterval(()=>{
   setTimeout(()=>h.remove(),6000);
 },300);
 
-/* FLAMES */
+/* ENTER KEY SUPPORT */
+document.addEventListener("keydown",e=>{
+  if(e.key==="Enter") calc();
+});
+
+/* FLAMES CALC */
 function calc(){
   let a=n1.value.toLowerCase().replace(/\s/g,"");
   let b=n2.value.toLowerCase().replace(/\s/g,"");
-  if(!a||!b){res.innerText="Enter names ❗";return}
+
+  if(!a||!b){type("Enter names ❗");return}
+  if(!/^[a-z]+$/.test(a+b)){type("Only letters allowed ❗");return}
 
   let x=a.split(""),y=b.split("");
   for(let i=0;i<x.length;i++)
@@ -237,20 +267,40 @@ function calc(){
       if(x[i]==y[j]){x[i]=y[j]="";break}
 
   let c=x.join("").length+y.join("").length;
-  let f=["Friends 💛","Love ❤️","Affection 💕","Marriage 💍","Enemy 💢","Siblings 👨‍👩‍👧"];
-  while(f.length>1){
-    let i=(c%f.length)-1;
-    i>=0?f=f.slice(i+1).concat(f.slice(0,i)):f.pop();
+  let flames=["Friends 💛","Love ❤️","Affection 💕","Marriage 💍","Enemy 💢","Siblings 👨‍👩‍👧"];
+
+  while(flames.length>1){
+    let i=(c%flames.length)-1;
+    i>=0?flames=flames.slice(i+1).concat(flames.slice(0,i)):flames.pop();
   }
 
-  res.innerText=f[0];
-  saveHistory(`${a} ❤ ${b} → ${f[0]}`);
-  spark();
+  let percent=Math.min(100,(c*13)%101);
+  let zodiac=["♈","♉","♊","♋","♌","♍","♎","♏","♐","♑","♒","♓"];
+  let nick=["Sweetheart 💕","Cutie 😘","Angel 😇","King 👑","Queen 👸"];
+
+  let text=`${flames[0]}
+${percent}% Compatibility 💘
+Zodiac: ${zodiac[Math.floor(Math.random()*12)]}
+${nick[Math.floor(Math.random()*nick.length)]}`;
+
+  type(text);
+  saveHistory(`${a} ❤ ${b} → ${flames[0]} (${percent}%)`);
+  spark(25);
 }
 
-/* SPARK */
-function spark(){
-  for(let i=0;i<18;i++){
+/* TYPE EFFECT */
+function type(t){
+  res.innerHTML="";
+  let i=0;
+  let s=setInterval(()=>{
+    res.innerHTML+=t[i++]||"";
+    if(i>t.length) clearInterval(s);
+  },40);
+}
+
+/* SPARK EFFECT */
+function spark(n){
+  for(let i=0;i<n;i++){
     let s=document.createElement("div");
     s.innerHTML="✨";
     s.className="spark";
@@ -265,8 +315,13 @@ function spark(){
 function saveHistory(t){
   let h=JSON.parse(localStorage.getItem("flames")||"[]");
   h.unshift(t);
-  if(h.length>10)h.pop();
+  if(h.length>10) h.pop();
   localStorage.setItem("flames",JSON.stringify(h));
+  render();
+}
+
+function render(){
+  let h=JSON.parse(localStorage.getItem("flames")||"[]");
   hist.innerHTML=h.map(e=>"• "+e).join("<br>");
 }
 
@@ -287,13 +342,15 @@ function exportHistory(){
 /* STATS */
 function stats(){
   let h=JSON.parse(localStorage.getItem("flames")||"[]");
-  alert("Total Checks: "+h.length);
+  alert("Total Love Checks: "+h.length);
 }
 
 /* SHARE */
 function shareWA(){
   window.open(`https://wa.me/?text=${encodeURIComponent(res.innerText)}`);
 }
+
+render();
 </script>
 
 </body>
