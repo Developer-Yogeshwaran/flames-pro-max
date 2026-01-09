@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>FLAMES PRO 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+/* BACKGROUND */
+body{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:
+    linear-gradient(120deg,rgba(0,0,0,.6),rgba(0,0,0,.85)),
+    url("flames-bg.png");
+  background-size:cover;
+  background-position:center;
+  background-attachment:fixed;
+  overflow:hidden;
+  transition:.6s;
+}
+
+body.neon{
+  background:
+    linear-gradient(120deg,rgba(0,0,0,.8),rgba(0,0,0,.95)),
+    url("flames-bg.png");
+}
+
+/* CARD */
+.card{
+  width:390px;
+  padding:30px;
+  border-radius:26px;
+  background:rgba(255,255,255,.22);
+  backdrop-filter:blur(22px);
+  box-shadow:0 25px 70px rgba(0,0,0,.65);
+  text-align:center;
+  color:#fff;
+  animation:fade 1s ease;
+}
+
+@keyframes fade{
+  from{opacity:0;transform:scale(.9)}
+  to{opacity:1;transform:scale(1)}
+}
+
+h1{
+  margin-bottom:15px;
+  text-shadow:0 0 30px #ff9ad5;
+}
+
+/* INPUT */
+input{
+  width:100%;
+  padding:14px;
+  margin:8px 0;
+  border-radius:15px;
+  border:none;
+  outline:none;
+  font-size:15px;
+}
+
+/* BUTTON */
+button{
+  margin-top:12px;
+  padding:14px 32px;
+  border-radius:40px;
+  border:none;
+  background:linear-gradient(135deg,#ff0844,#ffb199);
+  color:#fff;
+  font-weight:bold;
+  cursor:pointer;
+  box-shadow:0 0 40px rgba(255,0,120,.9);
+  transition:.3s;
+}
+button:hover{transform:scale(1.12)}
+
+/* RESULT */
+.result{
+  margin-top:18px;
+  min-height:70px;
+  font-size:21px;
+  font-weight:bold;
+  text-shadow:0 0 25px #fff;
+  white-space:pre-line;
+}
+
+/* HISTORY */
+.history{
+  margin-top:12px;
+  max-height:90px;
+  overflow:auto;
+  font-size:13px;
+  text-align:left;
+}
+
+/* CONTROLS */
+.controls{
+  display:flex;
+  justify-content:space-between;
+  margin-top:15px;
+  font-size:20px;
+}
+.control{cursor:pointer}
+
+/* HEART RAIN */
+.heart{
+  position:absolute;
+  font-size:22px;
+  animation:fall linear infinite;
+}
+@keyframes fall{
+  from{top:-10%}
+  to{top:110%}
+}
+
+/* SPARK */
+.spark{
+  position:absolute;
+  font-size:14px;
+  animation:spark .8s linear;
+}
+@keyframes spark{
+  from{opacity:1;transform:translateY(0)}
+  to{opacity:0;transform:translateY(-40px)}
+}
+
+/* CREDIT */
+.credit{
+  margin-top:14px;
+  font-size:12px;
+  opacity:.95;
+  text-align:center;
+  letter-spacing:.4px;
+  text-shadow:0 0 12px rgba(255,255,255,.6);
+}
+
+.credit a{
+  color:#ffd1ec;
+  text-decoration:none;
+  font-weight:600;
+  margin:0 4px;
+}
+
+.credit a:hover{
+  text-decoration:underline;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h1>🔥 FLAMES PRO 🔥</h1>
+
+  <input id="n1" placeholder="Your Name">
+  <input id="n2" placeholder="Partner Name">
+
+  <button onclick="calc()">Check 💖</button>
+
+  <div class="result" id="res"></div>
+  <div class="history" id="hist"></div>
+
+  <div class="controls">
+    <div class="control" onclick="toggleMusic(this)">🎵</div>
+    <div class="control" onclick="toggleMode()">⚡</div>
+    <div class="control" onclick="shareWA()">📤</div>
+    <div class="control" onclick="exportHistory()">⬇️</div>
+    <div class="control" onclick="stats()">📊</div>
+    <div class="control" onclick="clearHistory()">🗑️</div>
+  </div>
+
+  <!-- CREDIT -->
+  <div class="credit">
+    © <span id="year"></span>
+    Made by <strong>Yogeshwaran</strong><br>
+    <a href="https://github.com/Yogeshwaran" target="_blank">GitHub</a> |
+    <a href="https://www.linkedin.com/in/yogeshwaran" target="_blank">LinkedIn</a>
+  </div>
+</div>
+
+<audio id="music" loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3">
+</audio>
+
+<script>
+const n1=document.getElementById("n1");
+const n2=document.getElementById("n2");
+const res=document.getElementById("res");
+const hist=document.getElementById("hist");
+
+document.getElementById("year").innerText=new Date().getFullYear();
+
+/* MUSIC */
+let musicOn=false;
+const m=document.getElementById("music");
+function toggleMusic(el){
+  musicOn?m.pause():m.play();
+  musicOn=!musicOn;
+  el.innerText=musicOn?"🔇":"🎵";
+}
+
+/* MODE */
+function toggleMode(){
+  document.body.classList.toggle("neon");
+}
+
+/* HEART RAIN */
+setInterval(()=>{
+  let h=document.createElement("div");
+  h.innerHTML="💖";
+  h.className="heart";
+  h.style.left=Math.random()*100+"vw";
+  h.style.animationDuration=(3+Math.random()*3)+"s";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),6000);
+},300);
+
+/* FLAMES */
+function calc(){
+  let a=n1.value.toLowerCase().replace(/\s/g,"");
+  let b=n2.value.toLowerCase().replace(/\s/g,"");
+  if(!a||!b){res.innerText="Enter names ❗";return}
+
+  let x=a.split(""),y=b.split("");
+  for(let i=0;i<x.length;i++)
+    for(let j=0;j<y.length;j++)
+      if(x[i]==y[j]){x[i]=y[j]="";break}
+
+  let c=x.join("").length+y.join("").length;
+  let f=["Friends 💛","Love ❤️","Affection 💕","Marriage 💍","Enemy 💢","Siblings 👨‍👩‍👧"];
+  while(f.length>1){
+    let i=(c%f.length)-1;
+    i>=0?f=f.slice(i+1).concat(f.slice(0,i)):f.pop();
+  }
+
+  res.innerText=f[0];
+  saveHistory(`${a} ❤ ${b} → ${f[0]}`);
+  spark();
+}
+
+/* SPARK */
+function spark(){
+  for(let i=0;i<18;i++){
+    let s=document.createElement("div");
+    s.innerHTML="✨";
+    s.className="spark";
+    s.style.left=(45+Math.random()*20)+"%";
+    s.style.top="50%";
+    document.body.appendChild(s);
+    setTimeout(()=>s.remove(),800);
+  }
+}
+
+/* HISTORY */
+function saveHistory(t){
+  let h=JSON.parse(localStorage.getItem("flames")||"[]");
+  h.unshift(t);
+  if(h.length>10)h.pop();
+  localStorage.setItem("flames",JSON.stringify(h));
+  hist.innerHTML=h.map(e=>"• "+e).join("<br>");
+}
+
+function clearHistory(){
+  localStorage.removeItem("flames");
+  hist.innerHTML="";
+}
+
+/* EXPORT */
+function exportHistory(){
+  let h=localStorage.getItem("flames")||"";
+  let a=document.createElement("a");
+  a.href="data:text/plain,"+encodeURIComponent(h);
+  a.download="flames-history.txt";
+  a.click();
+}
+
+/* STATS */
+function stats(){
+  let h=JSON.parse(localStorage.getItem("flames")||"[]");
+  alert("Total Checks: "+h.length);
+}
+
+/* SHARE */
+function shareWA(){
+  window.open(`https://wa.me/?text=${encodeURIComponent(res.innerText)}`);
+}
+</script>
+
+</body>
+</html>
