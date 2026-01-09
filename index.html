@@ -6,12 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:'Poppins',sans-serif;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
 
 /* BACKGROUND */
 body{
@@ -49,17 +44,9 @@ body.neon{
   color:#fff;
   animation:fade 1s ease;
 }
+@keyframes fade{from{opacity:0;transform:scale(.9)} to{opacity:1;transform:scale(1)}}
 
-@keyframes fade{
-  from{opacity:0;transform:scale(.9)}
-  to{opacity:1;transform:scale(1)}
-}
-
-h1{
-  margin-bottom:15px;
-  font-size:1.7rem;
-  text-shadow:0 0 30px #ff9ad5;
-}
+h1{margin-bottom:15px;font-size:1.7rem;text-shadow:0 0 30px #ff9ad5;}
 
 /* INPUTS */
 input{
@@ -115,34 +102,15 @@ button:hover{transform:scale(1.1)}
   margin-top:15px;
   font-size:1.1rem;
 }
-.control{
-  flex:1;
-  margin:3px;
-  text-align:center;
-  cursor:pointer;
-}
+.control{flex:1;margin:3px;text-align:center;cursor:pointer}
 
 /* HEART RAIN */
-.heart{
-  position:absolute;
-  font-size:20px;
-  animation:fall linear infinite;
-}
-@keyframes fall{
-  from{top:-10%}
-  to{top:110%}
-}
+.heart{position:absolute;font-size:20px;animation:fall linear infinite}
+@keyframes fall{from{top:-10%}to{top:110%}}
 
 /* SPARKS */
-.spark{
-  position:absolute;
-  font-size:12px;
-  animation:spark .8s linear;
-}
-@keyframes spark{
-  from{opacity:1;transform:translateY(0)}
-  to{opacity:0;transform:translateY(-40px)}
-}
+.spark{position:absolute;font-size:12px;animation:spark .8s linear}
+@keyframes spark{from{opacity:1;transform:translateY(0)} to{opacity:0;transform:translateY(-40px)}}
 
 /* CREDIT */
 .credit{
@@ -161,11 +129,7 @@ button:hover{transform:scale(1.1)}
   font-weight:600;
   margin:0 4px;
 }
-.credit a:hover{
-  text-decoration:underline;
-  transform:scale(1.05);
-  display:inline-block;
-}
+.credit a:hover{ text-decoration:underline; transform:scale(1.05); display:inline-block;}
 
 /* RESPONSIVE */
 @media(max-width:400px){
@@ -206,12 +170,14 @@ button:hover{transform:scale(1.1)}
     © <span id="year"></span> • Made by <strong>Yogeshwaran</strong> |
     <a href="https://github.com/Yogeshwaran" target="_blank">GitHub</a> |
     <a href="https://www.linkedin.com/in/yogeshwaran-a-64655b396" target="_blank">LinkedIn</a>
-     FLAMES Pro Max 🔥
+    • FLAMES Pro Max 🔥
   </div>
 </div>
 
-<audio id="music" loop>
-  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3">
+<!-- BACKGROUND MUSIC -->
+<audio id="bgMusic" loop>
+  <source src="dheema.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
 </audio>
 
 <script>
@@ -223,19 +189,21 @@ const hist=document.getElementById("hist");
 /* AUTO YEAR */
 document.getElementById("year").innerText=new Date().getFullYear();
 
-/* MUSIC */
+/* MUSIC - PLAY IMMEDIATELY AT FULL VOLUME */
 let musicOn=false;
-const m=document.getElementById("music");
+const bgMusic=document.getElementById("bgMusic");
+window.addEventListener("load", ()=>{
+  bgMusic.volume=0.5; // full volume
+  bgMusic.play().then(()=>{ musicOn=true; }).catch(()=>{ console.log("Autoplay blocked by browser."); });
+});
+
 function toggleMusic(el){
-  musicOn?m.pause():m.play();
-  musicOn=!musicOn;
-  el.innerText=musicOn?"🔇":"🎵";
+  if(musicOn){ bgMusic.pause(); el.innerText="🎵"; musicOn=false; }
+  else { bgMusic.play(); el.innerText="🔇"; musicOn=true; }
 }
 
 /* MODE */
-function toggleMode(){
-  document.body.classList.toggle("neon");
-}
+function toggleMode(){document.body.classList.toggle("neon");}
 
 /* HEART RAIN */
 setInterval(()=>{
@@ -248,16 +216,13 @@ setInterval(()=>{
   setTimeout(()=>h.remove(),6000);
 },300);
 
-/* ENTER KEY SUPPORT */
-document.addEventListener("keydown",e=>{
-  if(e.key==="Enter") calc();
-});
+/* ENTER KEY */
+document.addEventListener("keydown",e=>{ if(e.key==="Enter") calc(); });
 
 /* FLAMES CALC */
 function calc(){
   let a=n1.value.toLowerCase().replace(/\s/g,"");
   let b=n2.value.toLowerCase().replace(/\s/g,"");
-
   if(!a||!b){type("Enter names ❗");return}
   if(!/^[a-z]+$/.test(a+b)){type("Only letters allowed ❗");return}
 
@@ -277,11 +242,7 @@ function calc(){
   let percent=Math.min(100,(c*13)%101);
   let zodiac=["♈","♉","♊","♋","♌","♍","♎","♏","♐","♑","♒","♓"];
   let nick=["Sweetheart 💕","Cutie 😘","Angel 😇","King 👑","Queen 👸"];
-
-  let text=`${flames[0]}
-${percent}% Compatibility 💘
-Zodiac: ${zodiac[Math.floor(Math.random()*12)]}
-${nick[Math.floor(Math.random()*nick.length)]}`;
+  let text=`${flames[0]}\n${percent}% Compatibility 💘\nZodiac: ${zodiac[Math.floor(Math.random()*12)]}\n${nick[Math.floor(Math.random()*nick.length)]}`;
 
   type(text);
   saveHistory(`${a} ❤ ${b} → ${flames[0]} (${percent}%)`);
@@ -292,10 +253,7 @@ ${nick[Math.floor(Math.random()*nick.length)]}`;
 function type(t){
   res.innerHTML="";
   let i=0;
-  let s=setInterval(()=>{
-    res.innerHTML+=t[i++]||"";
-    if(i>t.length) clearInterval(s);
-  },40);
+  let s=setInterval(()=>{ res.innerHTML+=t[i++]||""; if(i>t.length) clearInterval(s); },40);
 }
 
 /* SPARK EFFECT */
@@ -319,16 +277,11 @@ function saveHistory(t){
   localStorage.setItem("flames",JSON.stringify(h));
   render();
 }
-
 function render(){
   let h=JSON.parse(localStorage.getItem("flames")||"[]");
   hist.innerHTML=h.map(e=>"• "+e).join("<br>");
 }
-
-function clearHistory(){
-  localStorage.removeItem("flames");
-  hist.innerHTML="";
-}
+function clearHistory(){localStorage.removeItem("flames"); hist.innerHTML="";}
 
 /* EXPORT */
 function exportHistory(){
@@ -346,9 +299,7 @@ function stats(){
 }
 
 /* SHARE */
-function shareWA(){
-  window.open(`https://wa.me/?text=${encodeURIComponent(res.innerText)}`);
-}
+function shareWA(){ window.open(`https://wa.me/?text=${encodeURIComponent(res.innerText)}`); }
 
 render();
 </script>
