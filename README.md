@@ -1,53 +1,35 @@
-🔥 FLAMES Pro Max 💖
+# 🔥 FLAMES Pro Max 💖
 
-FLAMES Pro Max is a modern and interactive web application that calculates relationship compatibility using the classic FLAMES logic. The project features a visually appealing glassmorphism UI, smooth animations, and engaging effects to deliver an enjoyable user experience.
+FLAMES Pro Max is a modern and interactive web application that calculates relationship compatibility using the classic **FLAMES logic**. The project features a visually appealing glassmorphism UI, smooth animations, and engaging effects to deliver an enjoyable user experience.
 
-🌐 Live Project
-
+## 🌐 Live Project
 👉 https://flames-pro.netlify.app/
 
-✨ Features
+## ✨ Features
+- FLAMES compatibility calculation  
+- Animated heart rain & spark effects  
+- Glassmorphism UI with neon mode  
+- Background music toggle  
+- Result history stored using `localStorage`  
+- Export history as text file  
+- WhatsApp sharing option  
+- Fully responsive (mobile & desktop)
 
-FLAMES compatibility calculation
+## 🛠️ Technologies Used
+- HTML5  
+- CSS3  
+- JavaScript (Vanilla JS)
 
-Animated heart rain & spark effects
+## 🚀 How to Run Locally
+1. Clone or download this repository  
+2. Place `flames-bg.png` in the project folder  
+3. Open `index.html` in any modern browser  
 
-Glassmorphism design with neon mode
+## 👨‍💻 Developer
+**Yogeshwaran**  
+- GitHub: https://github.com/Yogeshwaran  
+- LinkedIn: https://www.linkedin.com/in/yogeshwaran  
 
-Background music toggle
-
-Result history stored using localStorage
-
-Export history as text file
-
-WhatsApp sharing option
-
-Mobile & desktop responsive design
-
-🛠️ Technologies Used
-
-HTML5
-
-CSS3
-
-JavaScript (Vanilla JS)
-
-🚀 How to Run Locally
-
-Clone or download the repository
-
-Place flames-bg.png in the project folder
-
-Open index.html in any modern browser
-
-👨‍💻 Developer
-
-Yogeshwaran
-
-GitHub: https://github.com/Yogeshwaran
-
-LinkedIn: https://www.linkedin.com/in/yogeshwaran
-
-📄 License
-
+## 📄 License
 This project is open-source and free to use for learning and educational purposes.
+
